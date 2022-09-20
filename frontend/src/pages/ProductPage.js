@@ -1,13 +1,24 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Row, Col, Image, ListGroup, Button, Card } from 'react-bootstrap';
 
-import { Rating } from "../components";
-import products from "../products";
+import { Rating } from '../components';
+import axios from 'axios';
 
 function ProductPage() {
 	const params = useParams();
-	const product = products.find((p) => p._id === params.id);
+	const [product, setProduct] = useState({});
+
+	useEffect(() => {
+		async function fetchProduct() {
+			const { data } = await axios.get(
+				`http://127.0.0.1:8000/api/products/${params.id}`
+			);
+			setProduct(data);
+		}
+
+		fetchProduct();
+	}, []);
 	return (
 		<div>
 			<Link to="/" className="btn btn-light my-3">
@@ -26,7 +37,7 @@ function ProductPage() {
 							<Rating
 								value={product.rating}
 								text={`${product.numReviews} reviews`}
-								color={"#f8e825"}
+								color={'#f8e825'}
 							/>
 						</ListGroup.Item>
 						<ListGroup.Item>Price: ${product.price}</ListGroup.Item>
@@ -48,7 +59,7 @@ function ProductPage() {
 								<Row>
 									<Col>Status:</Col>
 									<Col>
-										{product.countInStock > 0 ? "In Stock" : "Out of Stock"}
+										{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
 									</Col>
 								</Row>
 							</ListGroup.Item>
