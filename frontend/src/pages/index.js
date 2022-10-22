@@ -1,4 +1,5 @@
-import Home from "./Home";
-import ProductPage from "./ProductPage";
+import HomePage from './HomePage';
+import ProductPage from './ProductPage';
+import CartPage from './CartPage';
 
-export { Home, ProductPage };
+export { HomePage as Home, ProductPage, CartPage };

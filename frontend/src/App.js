@@ -1,9 +1,9 @@
-import React from "react";
-import { Container } from "react-bootstrap";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Header, Footer } from "./components";
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Header, Footer } from './components';
 
-import { Home, ProductPage } from "./pages";
+import { Home, ProductPage, CartPage } from './pages';
 
 function App() {
 	return (
@@ -14,6 +14,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Home />} exact />
 						<Route path="/product/:id" element={<ProductPage />} />
+						<Route path="/cart/:id?" element={<CartPage />} />
 					</Routes>
 				</Container>
 			</main>

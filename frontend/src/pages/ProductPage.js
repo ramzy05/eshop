@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Button, Card } from 'react-bootstrap';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import {
+	Row,
+	Col,
+	Image,
+	ListGroup,
+	Button,
+	Card,
+	Form,
+} from 'react-bootstrap';
 import { listProductsDetails } from '../actions/productActions';
 import { Rating, Loader, Message } from '../components';
 
-function ProductPage() {
+function ProductPage({ history }) {
+	const [qty, setQty] = useState(1);
+
+	const navigate = useNavigate();
 	const params = useParams();
 	const dispatch = useDispatch();
 	const productDetails = useSelector((state) => state.productDetails);
@@ -14,6 +25,10 @@ function ProductPage() {
 	useEffect(() => {
 		dispatch(listProductsDetails(params.id));
 	}, [dispatch, params]);
+
+	const addToCartHandler = () => {
+		navigate(`/cart/${params.id}?qty=${qty}`);
+	};
 
 	return (
 		<div>
@@ -67,10 +82,35 @@ function ProductPage() {
 										</Col>
 									</Row>
 								</ListGroup.Item>
+
+								{product.countInStock > 0 && (
+									<ListGroup.Item>
+										<Row>
+											<Col>Qty:</Col>
+											<Col xs="auto" className="my-1">
+												<Form.Select
+													value={qty}
+													onChange={(e) => setQty(e.target.value)}
+												>
+													{[...Array(product.countInStock).keys()].map((x) => (
+														<option key={x + 1} value={x + 1}>
+															{x + 1}
+														</option>
+													))}
+												</Form.Select>
+											</Col>
+										</Row>
+									</ListGroup.Item>
+								)}
+
 								<ListGroup.Item>
 									<div className="d-grid gap-2">
-										<Button disabled={product.countInStock === 0} type="button">
-											ADD TO CART
+										<Button
+											onClick={addToCartHandler}
+											disabled={product.countInStock === 0}
+											type="button"
+										>
+											Add to Cart
 										</Button>
 									</div>
 								</ListGroup.Item>

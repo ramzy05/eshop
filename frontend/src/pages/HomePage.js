@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { Product, Loader, Message } from '../components';
 import { listProducts } from '../actions/productActions';
 
-function Home() {
+function HomePage() {
 	const dispatch = useDispatch();
 	const productList = useSelector((state) => state.productList);
 	const { error, loading, products } = productList;
@@ -32,4 +32,4 @@ function Home() {
 	);
 }
 
-export default Home;
+export default HomePage;
