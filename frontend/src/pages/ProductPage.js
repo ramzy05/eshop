@@ -13,7 +13,7 @@ import {
 import { listProductsDetails } from '../actions/productActions';
 import { Rating, Loader, Message } from '../components';
 
-function ProductPage({ history }) {
+function ProductPage() {
 	const [qty, setQty] = useState(1);
 
 	const navigate = useNavigate();
