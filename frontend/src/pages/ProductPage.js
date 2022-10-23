@@ -110,7 +110,7 @@ function ProductPage() {
 											disabled={product.countInStock === 0}
 											type="button"
 										>
-											Add to Cart
+											Add To Cart
 										</Button>
 									</div>
 								</ListGroup.Item>
