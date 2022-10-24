@@ -18,7 +18,7 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
 	? JSON.parse(localStorage.getItem('cartItems'))
 	: [];
 
-const initialState = {
+const preloadedState = {
 	cart: {
 		cartItems: cartItemsFromStorage,
 	},
@@ -26,10 +26,14 @@ const initialState = {
 
 const middleware = [thunk];
 
-const store = configureStore(
-	{ reducer: reducer },
-	initialState,
-	composeWithDevTools(applyMiddleware(...middleware))
-);
+const store = configureStore({
+	reducer,
+	preloadedState,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(middleware),
+	devTools: process.env.NODE_ENV !== 'production',
+	preloadedState,
+	// composeWithDevTools(applyMiddleware(..))
+});
 
 export default store;

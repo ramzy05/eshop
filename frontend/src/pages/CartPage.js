@@ -24,7 +24,6 @@ const CartPage = () => {
 
 	const cart = useSelector((state) => state.cart);
 	const { cartItems } = cart;
-	console.log('cartItems:', cartItems);
 
 	useEffect(() => {
 		if (productId) {
@@ -57,7 +56,7 @@ const CartPage = () => {
 										<Image src={item.image} alt={item.name} fluid rounded />
 									</Col>
 									<Col md={3}>
-										<Link to={`/products/${item.product}`}>{item.name}</Link>
+										<Link to={`/product/${item.product}`}>{item.name}</Link>
 									</Col>
 									<Col md={2}>${item.price}</Col>
 
