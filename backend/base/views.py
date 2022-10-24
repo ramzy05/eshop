@@ -21,7 +21,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     # Add custom claims
     token['username'] = user.username
-    token['message'] = 'hello'
+    # token[''] =
     # ...
 
     return token
